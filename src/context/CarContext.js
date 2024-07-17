@@ -2,11 +2,8 @@ import React, { createContext, useState } from 'react';
 
 export const CarContext = createContext();
 
-export const CarProvider = (props) => {
-  const [cars, setCars] = useState([
-    { id: 1, model: 'Model S', brand: 'Tesla', price: 80000, year: 2020 },
-    { id: 2, model: 'Mustang', brand: 'Ford', price: 55000, year: 2018 },
-  ]);
+export const CarProvider = ({ children }) => {
+  const [cars, setCars] = useState([]);
 
   const addCar = (car) => {
     car.id = cars.length + 1;
@@ -23,7 +20,7 @@ export const CarProvider = (props) => {
 
   return (
     <CarContext.Provider value={{ cars, addCar, updateCar, deleteCar }}>
-      {props.children}
+      {children}
     </CarContext.Provider>
   );
 };

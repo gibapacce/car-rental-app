@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CarContext } from '../context/CarContext';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Card, Container, Row, Col } from 'react-bootstrap';
 
 const CarDetails = () => {
   const { cars } = useContext(CarContext);
@@ -8,20 +9,27 @@ const CarDetails = () => {
   const car = cars.find((car) => car.id === parseInt(id));
 
   return (
-    <div>
+    <Container>
       <h2>Car Details</h2>
-      {car ? (
-        <div>
-          <p>Model: {car.model}</p>
-          <p>Brand: {car.brand}</p>
-          <p>Price: {car.price}</p>
-          <p>Year: {car.year}</p>
-          <Link to="/">Back</Link>
-        </div>
-      ) : (
-        <p>Car not found</p>
-      )}
-    </div>
+      <Row>
+        <Col sm={12} md={6} lg={4}>
+          <Card className="mb-3">
+            <Card.Body>
+              <Card.Title>{car.model}</Card.Title>
+              <Card.Text>
+                <strong>Brand:</strong> {car.brand}
+              </Card.Text>
+              <Card.Text>
+                <strong>Price:</strong> ${car.price}
+              </Card.Text>
+              <Card.Text>
+                <strong>Year:</strong> {car.year}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
